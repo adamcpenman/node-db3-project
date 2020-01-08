@@ -10,12 +10,19 @@ function findById(id) {
         .first()
 }
 
+function findSteps(id) {
+    return db('schemes')
+        .select('steps.id', 'schemes.scheme_name', 'steps.step_number', 'steps.instructions')
+        .join('steps', 'schemes.id', 'steps.scheme_id')
+        .where({ scheme_id: id })
+}
+  
 
 
 module.exports = {
     find,
     findById,
-    // findSteps,
+    findSteps,
     // add,
     // update,
     // remove
