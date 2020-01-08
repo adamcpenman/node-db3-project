@@ -23,7 +23,14 @@ function add(scheme) {
         .then( id => {
             return findById(id[0])
         })
+}
 
+function addStep(data, id) {
+     const stepData = { scheme_id: id, ...data }
+
+    return db('steps')
+        .insert(stepData)
+        .then(id => ({...stepData, id: id[0]}))
 }
 
 function update(changes, id) {
@@ -52,6 +59,7 @@ module.exports = {
     findById,
     findSteps,
     add,
+    addStep,
     update,
-    remove
+    remove,
 }
